@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Jobs;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PlayerController : MonoBehaviour
 {
@@ -31,6 +33,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         move = MoveAction.ReadValue<Vector2>();
 
         float horizontal = 0.0f;
@@ -56,13 +60,10 @@ public class PlayerController : MonoBehaviour
         Debug.Log(vertical);
 
         Vector2 position = transform.position;
-        position.x = position.x + 0.1f;
+        position.x = position.x + speed * horizontal;
+        position.x = position.x + speed * vertical;
         transform.position = position;
 
-        Vector2 move = MoveAction.ReadValue<Vector2>();
-        Debug.Log(move);
-        Vector2 position = (Vector2)transform.position + move * 0.1f;
-        transform.position = position;
     }
 
     void FixedUpdate()
